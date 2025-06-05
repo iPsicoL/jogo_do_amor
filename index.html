@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Roleta do Amor</title>
+    <!-- Inclui a folha de estilos CSS para a aparência do jogo -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="game-container">
+        <!-- Título que também exibe a pergunta atual ou instruções -->
+        <h1 id="question-display">Clique na roleta para começar!</h1>
+        
+        <div class="roulette-container">
+            <!-- A roleta em si, um div que girará -->
+            <div class="roulette-wheel" id="roulette-wheel">
+                <!-- Botão central para iniciar o giro da roleta -->
+                <div class="center-button"></div>
+            </div>
+        </div>
+
+        <div class="options-container">
+            <!-- Botão para a opção "Passa" -->
+            <button id="pass-button">Passa</button>
+            <!-- Botão para a opção "Deu Match" -->
+            <button id="match-button">Deu Match</button>
+        </div>
+
+        <!-- Contador de perguntas respondidas -->
+        <p class="question-counter">Perguntas Respondidas: <span id="answered-count">0</span></p>
+
+        <!-- Botão para encerrar o jogo a qualquer momento -->
+        <button id="end-game-button" class="end-game-button">Encerrar Jogo</button>
+
+        <!-- Área para exibir a mensagem de resultado final -->
+        <div id="result-message" class="result-message"></div>
+    </div>
+
+    <!-- Inclui o arquivo JavaScript que contém toda a lógica do jogo -->
+    <script src="script.js"></script>
+</body>
+</html>

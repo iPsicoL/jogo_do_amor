@@ -1,0 +1,208 @@
+body {
+    font-family: 'Inter', sans-serif; /* Fonte Inter para um visual moderno */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    /* Gradiente de vermelho para o fundo, criando um ambiente romântico */
+    background: linear-gradient(to bottom right, #ff4d4d, #b30000); 
+    margin: 0;
+    color: #fff; /* Cor do texto principal */
+    text-align: center;
+    overflow: hidden; /* Evita barras de rolagem indesejadas */
+}
+
+.game-container {
+    background-color: rgba(0, 0, 0, 0.4); /* Fundo semi-transparente para o conteúdo */
+    padding: 30px;
+    border-radius: 15px; /* Cantos arredondados para um toque suave */
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5); /* Sombra para profundidade */
+    max-width: 90%; /* Responsividade: largura máxima de 90% */
+    width: 600px; /* Largura preferencial */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative; /* Necessário para posicionar o botão de encerrar */
+    box-sizing: border-box; /* Garante que padding não aumente o tamanho total */
+}
+
+h1#question-display {
+    font-size: 2.2em;
+    margin-bottom: 30px;
+    min-height: 80px; /* Garante que o layout não mude muito ao exibir a pergunta */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6); /* Sombra no texto para melhor leitura */
+    color: #ffe0b2; /* Um tom de laranja claro para contraste e romantismo */
+}
+
+.roulette-container {
+    width: 250px;
+    height: 250px;
+    border-radius: 50%; /* Faz a roleta ser um círculo */
+    /* Gradiente radial para um visual mais rico na roleta */
+    background: radial-gradient(circle, #ff6666, #cc0000); 
+    border: 8px solid #ffcc00; /* Borda dourada vibrante */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 0 25px rgba(255, 204, 0, 0.8); /* Sombra brilhante */
+    margin-bottom: 40px;
+    cursor: pointer; /* Indica que é clicável */
+    position: relative;
+    overflow: hidden;
+}
+
+.roulette-wheel {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    /* Transição suave para o efeito de giro */
+    transition: transform 4s cubic-bezier(0.25, 0.1, 0.25, 1); 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.center-button {
+    width: 80px;
+    height: 80px;
+    background-color: #fff; /* Centro branco */
+    border-radius: 50%;
+    border: 5px solid #ff0000; /* Borda vermelha forte */
+    box-shadow: 0 0 15px rgba(255, 0, 0, 0.8); /* Sombra no botão central */
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    color: #ff0000;
+    font-size: 1.5em;
+    text-transform: uppercase;
+}
+
+.center-button::before {
+    content: 'GIRAR'; /* Texto dentro do botão central */
+}
+
+.options-container {
+    display: flex;
+    gap: 20px; /* Espaço entre os botões */
+    margin-top: 20px;
+    flex-wrap: wrap; /* Permite que os botões quebrem a linha em telas pequenas */
+    justify-content: center;
+}
+
+.options-container button {
+    padding: 15px 30px;
+    font-size: 1.2em;
+    border: none;
+    border-radius: 30px; /* Botões bem arredondados */
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease; /* Efeitos de hover */
+    text-transform: uppercase;
+    font-weight: bold;
+    letter-spacing: 1px;
+    box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.3); /* Sombra nos botões */
+}
+
+#pass-button {
+    background-color: #ffcc00; /* Amarelo dourado para "Passa" */
+    color: #8B4513; /* Marrom escuro para o texto */
+}
+
+#pass-button:hover {
+    background-color: #e6b800;
+    transform: translateY(-3px); /* Efeito de elevação no hover */
+}
+
+#match-button {
+    background-color: #00e676; /* Verde vibrante para "Deu Match" */
+    color: #fff;
+}
+
+#match-button:hover {
+    background-color: #00b359;
+    transform: translateY(-3px); /* Efeito de elevação no hover */
+}
+
+.question-counter {
+    margin-top: 25px;
+    font-size: 1.1em;
+    color: #ffcccc; /* Um vermelho mais claro para o texto */
+}
+
+.question-counter span {
+    font-weight: bold;
+    color: #fff;
+}
+
+.end-game-button {
+    background-color: #d32f2f; /* Vermelho escuro para o botão de encerrar */
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    margin-top: 30px;
+    font-size: 1em;
+    transition: background-color 0.3s ease;
+    box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.end-game-button:hover {
+    background-color: #b71c1c;
+}
+
+.result-message {
+    font-size: 2.5em; /* Mensagem final maior */
+    font-weight: bold;
+    margin-top: 30px;
+    color: #fff;
+    text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.7);
+    display: none; /* Escondido por padrão, só aparece no final */
+}
+
+/* Animação de rotação da roleta */
+.spinning {
+    animation: spin 3s ease-out forwards; /* Gira por 3 segundos com um efeito suave */
+}
+
+@keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(3600deg); } /* Gira 10 vezes (360 * 10) para um efeito legal */
+}
+
+/* Responsividade para telas menores */
+@media (max-width: 600px) {
+    .game-container {
+        padding: 20px;
+    }
+
+    h1#question-display {
+        font-size: 1.8em;
+        min-height: 60px;
+    }
+
+    .roulette-container {
+        width: 200px;
+        height: 200px;
+        margin-bottom: 30px;
+    }
+
+    .center-button {
+        width: 70px;
+        height: 70px;
+        font-size: 1.2em;
+    }
+
+    .options-container button {
+        padding: 12px 25px;
+        font-size: 1em;
+    }
+
+    .result-message {
+        font-size: 1.8em;
+    }
+}
