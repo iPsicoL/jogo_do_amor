@@ -3,41 +3,497 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Roleta do Amor</title>
-    <!-- Inclui a folha de estilos CSS para a aparência do jogo -->
-    <link rel="stylesheet" href="style.css">
+    <title>Roleta do Amor 2.0 - Com Prendas!</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* --- Estilos Gerais e Fundo Animado --- */
+        body {
+            font-family: 'Poppins', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #ff7e5f, #feb47b);
+            margin: 0;
+            color: #fff;
+            text-align: center;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .hearts-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 0;
+        }
+
+        .heart {
+            position: absolute;
+            bottom: -50px;
+            font-size: 2rem;
+            animation: floatUp 10s infinite ease-in;
+            color: rgba(255, 255, 255, 0.2);
+        }
+
+        .heart:nth-child(1) { left: 10%; animation-duration: 12s; }
+        .heart:nth-child(2) { left: 20%; animation-duration: 8s; animation-delay: 2s; }
+        .heart:nth-child(3) { left: 30%; animation-duration: 15s; }
+        .heart:nth-child(4) { left: 45%; animation-duration: 9s; animation-delay: 4s; }
+        .heart:nth-child(5) { left: 60%; animation-duration: 11s; }
+        .heart:nth-child(6) { left: 75%; animation-duration: 7s; animation-delay: 3s; }
+        .heart:nth-child(7) { left: 90%; animation-duration: 14s; }
+
+        @keyframes floatUp {
+            to {
+                transform: translateY(-105vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* --- Contêiner Principal do Jogo --- */
+        .game-container {
+            background-color: rgba(0, 0, 0, 0.35);
+            padding: 30px 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            max-width: 90%;
+            width: 600px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            box-sizing: border-box;
+            z-index: 1;
+            transition: opacity 0.5s ease;
+        }
+
+        h1#question-display {
+            font-size: clamp(1.5rem, 4vw, 2rem);
+            font-weight: 600;
+            margin-bottom: 30px;
+            min-height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.4);
+            color: #fff;
+        }
+
+        /* --- Estilos da Roleta --- */
+        .roulette-wrapper {
+            position: relative;
+            margin-bottom: 30px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .roulette-pointer {
+            width: 0;
+            height: 0;
+            border-left: 20px solid transparent;
+            border-right: 20px solid transparent;
+            border-top: 30px solid #ffde59;
+            position: absolute;
+            top: -20px;
+            z-index: 10;
+            filter: drop-shadow(0 -2px 2px rgba(0,0,0,0.3));
+        }
+
+        .roulette-container {
+            width: 280px;
+            height: 280px;
+            border-radius: 50%;
+            border: 10px solid #fff;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.3), inset 0 0 15px rgba(0, 0, 0, 0.4);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .roulette-wheel {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: conic-gradient(#ff5e57, #ffc93c, #a7ff83, #8a4fff, #3c91e6, #f95959, #ff5e57);
+            transition: transform 5s cubic-bezier(0.25, 0.1, 0.25, 1);
+        }
+
+        .center-button {
+            position: absolute;
+            width: 90px;
+            height: 90px;
+            background-color: #fff;
+            border-radius: 50%;
+            border: 5px solid #ff7e5f;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: bold;
+            color: #ff7e5f;
+            font-size: 1.5em;
+            text-transform: uppercase;
+            user-select: none;
+            transition: transform 0.2s ease;
+        }
+        
+        .center-button:hover { transform: scale(1.05); }
+        .center-button:active { transform: scale(0.95); }
+        .center-button.disabled {
+            cursor: not-allowed;
+            background-color: #ddd;
+            color: #888;
+            border-color: #ccc;
+        }
+
+        /* --- Botões de Opção e Controle --- */
+        .options-container {
+            display: flex;
+            gap: 20px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .options-container button, .control-button {
+            padding: 15px 30px;
+            font-size: 1.1em;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            font-weight: 600;
+            letter-spacing: 1px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .options-container button:active, .control-button:active {
+            transform: translateY(2px);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+        
+        .hidden { display: none; }
+
+        #pass-button { background-color: #ffc93c; color: #5d4037; }
+        #pass-button:hover { background-color: #f7b733; }
+        #match-button { background-color: #8edc81; color: #fff; }
+        #match-button:hover { background-color: #7ac76c; }
+
+        .question-counter {
+            margin-top: 25px;
+            font-size: 1.1em;
+            color: #eee;
+        }
+        .question-counter span { font-weight: bold; color: #fff; }
+
+        #end-game-button, #restart-game-button {
+            background-color: #ff6b6b;
+            color: #fff;
+            margin-top: 30px;
+        }
+        #end-game-button:hover, #restart-game-button:hover { background-color: #ee5253; }
+
+        /* --- Tela de Resultado --- */
+        .result-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        #result-message {
+            font-size: clamp(1.8rem, 5vw, 2.5rem);
+            font-weight: 700;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.7);
+        }
+
+        #result-details { font-size: 1.2rem; margin-bottom: 30px; }
+
+        /* --- MODAL DA PRENDA --- */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+
+        .modal-overlay.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal-content {
+            background: linear-gradient(135deg, #6a11cb, #2575fc);
+            padding: 40px;
+            border-radius: 20px;
+            text-align: center;
+            color: #fff;
+            max-width: 90%;
+            width: 500px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            transform: scale(0.9);
+            transition: transform 0.3s ease;
+        }
+        
+        .modal-overlay.visible .modal-content {
+            transform: scale(1);
+        }
+
+        .modal-content h2 {
+            font-size: 2.5rem;
+            margin-top: 0;
+            margin-bottom: 10px;
+            color: #fdd835;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        #forfeit-payer {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        #forfeit-text {
+            font-size: 1.8rem;
+            min-height: 60px;
+            margin-bottom: 30px;
+        }
+
+        /* --- Responsividade --- */
+        @media (max-width: 600px) {
+            .game-container { padding: 20px; }
+            .roulette-container { width: 220px; height: 220px; }
+            .center-button { width: 70px; height: 70px; font-size: 1.2em; }
+            .modal-content h2 { font-size: 2rem; }
+            #forfeit-text { font-size: 1.5rem; }
+        }
+    </style>
 </head>
 <body>
-    <div class="game-container">
-        <!-- Título que também exibe a pergunta atual ou instruções -->
-        <h1 id="question-display">Clique na roleta para começar!</h1>
-        
-        <div class="roulette-container">
-            <!-- A roleta em si, um div que girará -->
-            <div class="roulette-wheel" id="roulette-wheel">
-                <!-- Botão central para iniciar o giro da roleta -->
-                <div class="center-button"></div>
-            </div>
-        </div>
 
-        <div class="options-container">
-            <!-- Botão para a opção "Passa" -->
-            <button id="pass-button">Passa</button>
-            <!-- Botão para a opção "Deu Match" -->
-            <button id="match-button">Deu Match</button>
-        </div>
-
-        <!-- Contador de perguntas respondidas -->
-        <p class="question-counter">Perguntas Respondidas: <span id="answered-count">0</span></p>
-
-        <!-- Botão para encerrar o jogo a qualquer momento -->
-        <button id="end-game-button" class="end-game-button">Encerrar Jogo</button>
-
-        <!-- Área para exibir a mensagem de resultado final -->
-        <div id="result-message" class="result-message"></div>
+    <div class="hearts-container">
+        <div class="heart">❤️</div><div class="heart">💖</div><div class="heart">💕</div>
+        <div class="heart">💓</div><div class="heart">❤️</div><div class="heart">💖</div><div class="heart">💕</div>
     </div>
 
-    <!-- Inclui o arquivo JavaScript que contém toda a lógica do jogo -->
-    <script src="script.js"></script>
+    <div class="game-container">
+        <div id="game-area">
+            <h1 id="question-display">Clique em GIRAR para começar!</h1>
+            <div class="roulette-wrapper">
+                <div class="roulette-pointer"></div>
+                <div class="roulette-container">
+                    <div class="roulette-wheel" id="roulette-wheel"></div>
+                    <div class="center-button" id="spin-button">Girar</div>
+                </div>
+            </div>
+            <div class="options-container hidden" id="answer-buttons">
+                <button id="pass-button">Passa</button>
+                <button id="match-button">Deu Match</button>
+            </div>
+            <p class="question-counter hidden">Perguntas: <span id="answered-count">0</span> / <span id="total-questions">0</span></p>
+            <button id="end-game-button" class="control-button">Encerrar Jogo</button>
+        </div>
+
+        <div id="result-area" class="result-container hidden">
+            <h2 id="result-message"></h2>
+            <p id="result-details"></p>
+            <button id="restart-game-button" class="control-button">Jogar Novamente</button>
+        </div>
+    </div>
+
+    <!-- Modal da Prenda -->
+    <div id="forfeit-modal" class="modal-overlay">
+        <div class="modal-content">
+            <h2>Hora da Prenda!</h2>
+            <p id="forfeit-payer"></p>
+            <p id="forfeit-text"></p>
+            <button id="continue-button" class="control-button">Continuar</button>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const gameArea = document.getElementById('game-area');
+            const resultArea = document.getElementById('result-area');
+            const rouletteWheel = document.getElementById('roulette-wheel');
+            const spinButton = document.getElementById('spin-button');
+            const questionDisplay = document.getElementById('question-display');
+            const answerButtons = document.getElementById('answer-buttons');
+            const passButton = document.getElementById('pass-button');
+            const matchButton = document.getElementById('match-button');
+            const questionCounter = document.querySelector('.question-counter');
+            const answeredCountSpan = document.getElementById('answered-count');
+            const totalQuestionsSpan = document.getElementById('total-questions');
+            const endGameButton = document.getElementById('end-game-button');
+            const resultMessage = document.getElementById('result-message');
+            const resultDetails = document.getElementById('result-details');
+            const restartGameButton = document.getElementById('restart-game-button');
+            // Elementos do Modal
+            const forfeitModal = document.getElementById('forfeit-modal');
+            const forfeitPayer = document.getElementById('forfeit-payer');
+            const forfeitText = document.getElementById('forfeit-text');
+            const continueButton = document.getElementById('continue-button');
+
+            const questions = [
+                "Quem notou o outro primeiro?", "Quem tomou a iniciativa de conversar?", "Quem tomou a iniciativa do primeiro beijo?",
+                "Quem se apaixonou primeiro?", "Quem pediu em namoro?", "Quem disse “eu te amo” primeiro?", "Quem começa as discussões?",
+                "Quem pede desculpas primeiro?", "Quem é mais carinhoso?", "Quem é mais grudento?", "Quem faz as melhores surpresas?",
+                "Quem é mais romântico?", "Quem dá os melhores presentes?", "Quem é mais teimoso?", "Quem é mais dorminhoco?", "Quem ronca?",
+                "Quem demora mais para se arrumar?", "Quem é mais mal-humorado de manhã?", "Quem é mais “mão de vaca”?", "Quem é mais ciumento?",
+                "Quem é mais bagunceiro?", "Quem dança melhor?", "Quem é mais preguiçoso?", "Quem é mais comilão?", "Quem é mais brincalhão?",
+                "Quem ri de bobeiras?", "Quem é 'bom de copo'?", "Quem conta as melhores piadas?", "Quem não dispensa uma boa fofoca?",
+                "Quem tem mais manias esquisitas?", "Quem faz mais dramas?", "Quem era mais bagunceiro na escola?", "Quem cozinha melhor?",
+                "Quem entende mais de música?", "Quem se veste melhor?", "Quem se esquece de tudo?", "Quem tem mais mania de limpeza?",
+                "Quem prefere ficar em casa a sair?", "Quem gosta mais de pedir fast food?", "Quem sonhava em se casar?",
+                "Quem toma mais a iniciativa na hora H?", "Quem é mais criativo na cama?", "Quem é mais barulhento?",
+                "Quem manda mensagens mais ousadas?", "Quem curte experimentar em lugares diferentes?"
+            ];
+
+            const forfeits = [
+                "Remova uma peça de roupa.", "Dê um beijo demorado no pescoço.", "Faça uma massagem de 1 minuto nas costas.",
+                "Conte um segredo que nunca contou antes.", "Faça uma declaração de amor olhando nos olhos.", "Dance uma música brega por 30 segundos.",
+                "Deixe o outro postar uma foto engraçada sua nos stories.", "Faça 10 polichinelos falando 'eu te amo' a cada pulo.",
+                "Imite o outro por 1 minuto.", "Cante o refrão da música que vier à cabeça.", "Envie um áudio para o(a) parceiro(a) se declarando.",
+                "Dê um selinho de 10 segundos.", "Faça um elogio para cada parte do corpo do(a) parceiro(a)."
+            ];
+
+            let availableQuestions = [];
+            let answeredQuestionsCount = 0;
+            let matchCount = 0;
+            let isSpinning = false;
+            let currentRotation = 0;
+
+            function initializeGame() {
+                availableQuestions = [...questions];
+                answeredQuestionsCount = 0;
+                matchCount = 0;
+                isSpinning = false;
+                totalQuestionsSpan.textContent = questions.length;
+                answeredCountSpan.textContent = 0;
+                gameArea.classList.remove('hidden');
+                resultArea.classList.add('hidden');
+                questionDisplay.textContent = "Clique em GIRAR para começar!";
+                answerButtons.classList.add('hidden');
+                questionCounter.classList.add('hidden');
+                spinButton.classList.remove('disabled');
+                endGameButton.classList.remove('hidden');
+                forfeitModal.classList.remove('visible');
+            }
+
+            function spinRoulette() {
+                if (isSpinning) return;
+                
+                isSpinning = true;
+                spinButton.classList.add('disabled');
+                answerButtons.classList.add('hidden');
+                questionDisplay.textContent = "Girando a roleta...";
+                
+                const randomExtraRotation = 360 * 5 + Math.floor(Math.random() * 360);
+                currentRotation += randomExtraRotation;
+                rouletteWheel.style.transform = `rotate(${currentRotation}deg)`;
+
+                setTimeout(() => {
+                    const question = getRandomQuestion();
+                    if (question) {
+                        questionDisplay.textContent = question;
+                        answerButtons.classList.remove('hidden');
+                        questionCounter.classList.remove('hidden');
+                        isSpinning = false;
+                    } else {
+                        displayFinalResult();
+                    }
+                }, 5000);
+            }
+
+            function getRandomQuestion() {
+                if (availableQuestions.length === 0) return null;
+                const randomIndex = Math.floor(Math.random() * availableQuestions.length);
+                const [question] = availableQuestions.splice(randomIndex, 1);
+                return question;
+            }
+
+            function handleAnswer(isMatch) {
+                if (isSpinning) return;
+
+                answeredQuestionsCount++;
+                answeredCountSpan.textContent = answeredQuestionsCount;
+
+                if (isMatch) {
+                    matchCount++;
+                    proceedToNextRound();
+                } else {
+                    showForfeit();
+                }
+            }
+
+            function showForfeit() {
+                const whoPays = Math.random() < 0.5 ? "ELE" : "ELA";
+                const randomForfeit = forfeits[Math.floor(Math.random() * forfeits.length)];
+
+                forfeitPayer.textContent = `${whoPays} vai pagar a prenda!`;
+                forfeitText.textContent = `"${randomForfeit}"`;
+                forfeitModal.classList.add('visible');
+            }
+
+            function proceedToNextRound() {
+                forfeitModal.classList.remove('visible');
+                if (availableQuestions.length > 0) {
+                    spinRoulette();
+                } else {
+                    displayFinalResult();
+                }
+            }
+
+            function displayFinalResult() {
+                gameArea.classList.add('hidden');
+                resultArea.classList.remove('hidden');
+                const totalAnswered = answeredQuestionsCount > 0 ? answeredQuestionsCount : 1;
+                const percentage = Math.round((matchCount / totalAnswered) * 100);
+                
+                let message = "";
+                if (percentage >= 80) {
+                    message = "Sintonia Perfeita! ✨";
+                } else if (percentage >= 50) {
+                    message = "Vocês se conhecem bem! 😉";
+                } else {
+                    message = "Que divertido! Continuem se conhecendo! 😊";
+                }
+                
+                resultMessage.textContent = message;
+                resultDetails.textContent = `Vocês tiveram ${matchCount} de ${answeredQuestionsCount} matches (${percentage}% de sintonia)!`;
+            }
+
+            spinButton.addEventListener('click', spinRoulette);
+            passButton.addEventListener('click', () => handleAnswer(false));
+            matchButton.addEventListener('click', () => handleAnswer(true));
+            endGameButton.addEventListener('click', displayFinalResult);
+            restartGameButton.addEventListener('click', initializeGame);
+            continueButton.addEventListener('click', proceedToNextRound);
+
+            initializeGame();
+        });
+    </script>
 </body>
 </html>
