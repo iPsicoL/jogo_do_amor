@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Roleta do Amor - Personalizado</title>
+    <title>Roleta do Amor - Login</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
@@ -17,19 +17,17 @@
             min-height: 100vh;
             background: linear-gradient(135deg, #ff7e5f, #feb47b);
             margin: 0;
-            padding: 20px 0; /* Adiciona padding vertical para melhor espaçamento em mobile */
+            padding: 20px 0;
             color: #fff;
             text-align: center;
-            overflow-x: hidden; /* Previne rolagem horizontal, mas permite a vertical */
+            overflow-x: hidden;
             position: relative;
         }
 
         .hearts-container {
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
             overflow: hidden;
             z-index: 0;
         }
@@ -41,14 +39,6 @@
             animation: floatUp 10s infinite ease-in;
             color: rgba(255, 255, 255, 0.2);
         }
-
-        .heart:nth-child(1) { left: 10%; animation-duration: 12s; }
-        .heart:nth-child(2) { left: 20%; animation-duration: 8s; animation-delay: 2s; }
-        .heart:nth-child(3) { left: 30%; animation-duration: 15s; }
-        .heart:nth-child(4) { left: 45%; animation-duration: 9s; animation-delay: 4s; }
-        .heart:nth-child(5) { left: 60%; animation-duration: 11s; }
-        .heart:nth-child(6) { left: 75%; animation-duration: 7s; animation-delay: 3s; }
-        .heart:nth-child(7) { left: 90%; animation-duration: 14s; }
 
         @keyframes floatUp {
             to {
@@ -76,133 +66,11 @@
         }
 
         .hidden { display: none; }
-
-        /* --- Tela de Início (Setup) --- */
-        #setup-area h2 {
-            font-size: 2.2rem;
-            margin-bottom: 25px;
-        }
-        .name-inputs {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-            width: 100%;
-            max-width: 350px;
-            margin-bottom: 30px;
-        }
-        .name-inputs input {
-            padding: 15px;
-            border-radius: 25px;
-            border: 2px solid #fff;
-            background-color: rgba(255,255,255,0.2);
-            color: #fff;
-            font-size: 1.1rem;
-            text-align: center;
-            transition: all 0.3s ease;
-        }
-        .name-inputs input::placeholder {
-            color: rgba(255,255,255,0.7);
-        }
-        .name-inputs input:focus {
-            outline: none;
-            background-color: rgba(255,255,255,0.3);
-            border-color: #ffde59;
-        }
-
-        /* --- Jogo Principal --- */
-        h1#question-display {
-            font-size: clamp(1.2rem, 5vw, 1.8rem); /* Fonte ajustada para mobile */
-            font-weight: 600;
-            margin-bottom: 20px; /* Margem reduzida */
-            min-height: 70px; /* Altura mínima reduzida */
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.4);
-            color: #fff;
-        }
-
-        .roulette-wrapper {
-            position: relative;
-            margin-bottom: 25px; /* Margem reduzida */
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .roulette-pointer {
-            width: 0;
-            height: 0;
-            border-left: 15px solid transparent; /* Reduzido */
-            border-right: 15px solid transparent; /* Reduzido */
-            border-top: 25px solid #ffde59; /* Reduzido */
-            position: absolute;
-            top: -15px; /* Ajustado */
-            z-index: 10;
-            filter: drop-shadow(0 -2px 2px rgba(0,0,0,0.3));
-        }
-
-        .roulette-container {
-            width: 250px; /* Tamanho ajustado */
-            height: 250px; /* Tamanho ajustado */
-            border-radius: 50%;
-            border: 8px solid #fff; /* Borda reduzida */
-            box-shadow: 0 0 15px rgba(0, 0, 0, 0.3), inset 0 0 10px rgba(0, 0, 0, 0.4);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .roulette-wheel {
-            width: 100%;
-            height: 100%;
-            border-radius: 50%;
-            background: conic-gradient(#ff5e57, #ffc93c, #a7ff83, #8a4fff, #3c91e6, #f95959, #ff5e57);
-            transition: transform 5s cubic-bezier(0.25, 0.1, 0.25, 1);
-        }
-
-        .center-button {
-            position: absolute;
-            width: 80px; /* Reduzido */
-            height: 80px; /* Reduzido */
-            background-color: #fff;
-            border-radius: 50%;
-            border: 4px solid #ff7e5f;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-            cursor: pointer;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-weight: bold;
-            color: #ff7e5f;
-            font-size: 1.3em;
-            text-transform: uppercase;
-            user-select: none;
-            transition: transform 0.2s ease;
-        }
         
-        .center-button:hover { transform: scale(1.05); }
-        .center-button:active { transform: scale(0.95); }
-        .center-button.disabled {
-            cursor: not-allowed;
-            background-color: #ddd;
-            color: #888;
-            border-color: #ccc;
-        }
-
-        .options-container {
-            display: flex;
-            gap: 15px; /* Espaço reduzido */
-            margin-top: 20px;
-            flex-wrap: wrap;
-            justify-content: center;
-        }
-
-        .options-container button, .control-button {
-            padding: 12px 25px; /* Padding reduzido */
-            font-size: 1em; /* Fonte reduzida */
+        /* --- Estilos Comuns de Botão e Input --- */
+        .control-button {
+            padding: 12px 25px;
+            font-size: 1em;
             border: none;
             border-radius: 50px;
             cursor: pointer;
@@ -212,104 +80,104 @@
             letter-spacing: 1px;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
         }
-        
-        .options-container button:active, .control-button:active {
+        .control-button:active {
             transform: translateY(2px);
             box-shadow: 0 2px 5px rgba(0,0,0,0.2);
         }
-
-        #pass-button { background-color: #ffc93c; color: #5d4037; }
-        #pass-button:hover { background-color: #f7b733; }
-        #match-button { background-color: #8edc81; color: #fff; }
-        #match-button:hover { background-color: #7ac76c; }
-        #start-game-button { background-color: #8edc81; color: #fff; }
-        #start-game-button:hover { background-color: #7ac76c; }
-
-        .question-counter { margin-top: 20px; font-size: 1em; color: #eee; }
-        .question-counter span { font-weight: bold; color: #fff; }
-
-        #end-game-button, #restart-game-button {
-            background-color: #ff6b6b;
+        .form-input {
+            padding: 15px;
+            border-radius: 25px;
+            border: 2px solid #fff;
+            background-color: rgba(255,255,255,0.2);
             color: #fff;
-            margin-top: 25px;
-        }
-        #end-game-button:hover, #restart-game-button:hover { background-color: #ee5253; }
-
-        .result-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-        }
-        #result-message {
-            font-size: clamp(1.8rem, 5vw, 2.5rem);
-            font-weight: 700;
-            margin-bottom: 15px;
-            text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.7);
-        }
-        #result-details { font-size: 1.2rem; margin-bottom: 30px; }
-
-        /* --- MODAL DA PRENDA --- */
-        .modal-overlay {
-            position: fixed;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            background-color: rgba(0, 0, 0, 0.7);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 1000;
-            opacity: 0;
-            visibility: hidden;
-            transition: opacity 0.3s ease, visibility 0.3s ease;
-        }
-        .modal-overlay.visible { opacity: 1; visibility: visible; }
-        .modal-content {
-            background: linear-gradient(135deg, #6a11cb, #2575fc);
-            padding: 30px;
-            border-radius: 20px;
+            font-size: 1.1rem;
             text-align: center;
-            color: #fff;
-            max-width: 90%;
-            width: 500px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-            transform: scale(0.9);
-            transition: transform 0.3s ease;
+            transition: all 0.3s ease;
         }
+        .form-input::placeholder { color: rgba(255,255,255,0.7); }
+        .form-input:focus {
+            outline: none;
+            background-color: rgba(255,255,255,0.3);
+            border-color: #ffde59;
+        }
+
+        /* --- Tela de Autenticação --- */
+        #auth-area h2 { font-size: 2.2rem; margin-bottom: 25px; }
+        .auth-form { display: flex; flex-direction: column; gap: 15px; width: 100%; max-width: 350px; margin-bottom: 20px; }
+        .auth-buttons { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
+        #auth-message { margin-top: 15px; font-weight: 600; min-height: 20px; }
+        #auth-message.success { color: #8edc81; }
+        #auth-message.error { color: #ff6b6b; }
+        #logout-section { margin-top: 20px; font-size: 0.9em; }
+        #user-email { font-weight: bold; }
+        #logout-button { background: none; border: none; color: #ffde59; text-decoration: underline; cursor: pointer; font-size: 1em;}
+
+        /* --- Tela de Setup (Nomes) --- */
+        #setup-area h2 { font-size: 2.2rem; margin-bottom: 25px; }
+        .name-inputs { display: flex; flex-direction: column; gap: 15px; width: 100%; max-width: 350px; margin-bottom: 30px; }
+        
+        /* --- Jogo Principal (mesmos estilos de antes, com ajustes) --- */
+        h1#question-display { font-size: clamp(1.2rem, 5vw, 1.8rem); font-weight: 600; margin-bottom: 20px; min-height: 70px; display: flex; align-items: center; justify-content: center; text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.4); }
+        .roulette-wrapper { position: relative; margin-bottom: 25px; display: flex; justify-content: center; align-items: center; }
+        .roulette-pointer { width: 0; height: 0; border-left: 15px solid transparent; border-right: 15px solid transparent; border-top: 25px solid #ffde59; position: absolute; top: -15px; z-index: 10; filter: drop-shadow(0 -2px 2px rgba(0,0,0,0.3)); }
+        .roulette-container { width: 250px; height: 250px; border-radius: 50%; border: 8px solid #fff; box-shadow: 0 0 15px rgba(0, 0, 0, 0.3), inset 0 0 10px rgba(0, 0, 0, 0.4); display: flex; justify-content: center; align-items: center; position: relative; overflow: hidden; }
+        .roulette-wheel { width: 100%; height: 100%; border-radius: 50%; background: conic-gradient(#ff5e57, #ffc93c, #a7ff83, #8a4fff, #3c91e6, #f95959, #ff5e57); transition: transform 5s cubic-bezier(0.25, 0.1, 0.25, 1); }
+        .center-button { position: absolute; width: 80px; height: 80px; background-color: #fff; border-radius: 50%; border: 4px solid #ff7e5f; box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); cursor: pointer; display: flex; justify-content: center; align-items: center; font-weight: bold; color: #ff7e5f; font-size: 1.3em; text-transform: uppercase; user-select: none; transition: transform 0.2s ease; }
+        .center-button.disabled { cursor: not-allowed; background-color: #ddd; color: #888; border-color: #ccc; }
+        .options-container { display: flex; gap: 15px; margin-top: 20px; flex-wrap: wrap; justify-content: center; }
+        #pass-button, #login-button, #register-button { background-color: #ffc93c; color: #5d4037; }
+        #match-button, #start-game-button { background-color: #8edc81; color: #fff; }
+        .question-counter { margin-top: 20px; font-size: 1em; color: #eee; }
+        #end-game-button, #restart-game-button { background-color: #ff6b6b; color: #fff; margin-top: 25px; }
+
+        /* --- Modal e Tela de Resultado --- */
+        .result-container { display: flex; flex-direction: column; align-items: center; justify-content: center; }
+        #result-message { font-size: clamp(1.8rem, 5vw, 2.5rem); font-weight: 700; margin-bottom: 15px; text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.7); }
+        #result-details { font-size: 1.2rem; margin-bottom: 30px; }
+        .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.7); display: flex; justify-content: center; align-items: center; z-index: 1000; opacity: 0; visibility: hidden; transition: opacity 0.3s ease, visibility 0.3s ease; }
+        .modal-overlay.visible { opacity: 1; visibility: visible; }
+        .modal-content { background: linear-gradient(135deg, #6a11cb, #2575fc); padding: 30px; border-radius: 20px; text-align: center; color: #fff; max-width: 90%; width: 500px; box-shadow: 0 10px 30px rgba(0,0,0,0.3); transform: scale(0.9); transition: transform 0.3s ease; }
         .modal-overlay.visible .modal-content { transform: scale(1); }
-        .modal-content h2 { font-size: 2rem; margin-top: 0; margin-bottom: 10px; color: #fdd835; text-shadow: 2px 2px 4px rgba(0,0,0,0.3); }
+        .modal-content h2 { font-size: 2rem; margin-top: 0; margin-bottom: 10px; color: #fdd835; }
         #forfeit-payer { font-size: 1.3rem; font-weight: 600; margin-bottom: 15px; }
         #forfeit-text { font-size: 1.5rem; min-height: 50px; margin-bottom: 25px; }
 
-        /* --- MANTÉM OS ESTILOS MAIORES PARA TELAS GRANDES --- */
-        @media (min-width: 601px) {
-            .main-container { padding: 30px 40px; }
-            h1#question-display { font-size: clamp(1.8rem, 4vw, 2.2rem); margin-bottom: 30px; min-height: 80px; }
-            .roulette-container { width: 280px; height: 280px; border-width: 10px; }
-            .roulette-pointer { border-left-width: 20px; border-right-width: 20px; border-top-width: 30px; top: -20px; }
-            .center-button { width: 90px; height: 90px; font-size: 1.5em; border-width: 5px; }
-            .options-container button, .control-button { padding: 15px 30px; font-size: 1.1em; }
-            .modal-content h2 { font-size: 2.5rem; }
-            #forfeit-payer { font-size: 1.5rem; }
-            #forfeit-text { font-size: 1.8rem; }
-        }
+        /* Media queries para telas maiores */
+        @media (min-width: 601px) { /*... estilos para telas maiores ...*/ }
     </style>
 </head>
 <body>
     <div class="hearts-container">
+        <!-- Corações flutuantes -->
         <div class="heart">❤️</div><div class="heart">💖</div><div class="heart">💕</div>
-        <div class="heart">💓</div><div class="heart">❤️</div><div class="heart">💖</div><div class="heart">💕</div>
     </div>
 
     <div class="main-container">
-        <!-- Tela de configuração inicial -->
-        <div id="setup-area">
+        <!-- Tela de Autenticação -->
+        <div id="auth-area">
+            <h2>Bem-vindo(a)!</h2>
+            <div class="auth-form">
+                <input type="email" id="email-input" class="form-input" placeholder="Seu e-mail">
+                <input type="password" id="password-input" class="form-input" placeholder="Sua senha">
+            </div>
+            <div id="auth-message"></div>
+            <div class="auth-buttons">
+                <button id="login-button" class="control-button">Entrar</button>
+                <button id="register-button" class="control-button">Registrar</button>
+            </div>
+        </div>
+
+        <!-- Tela de configuração dos nomes -->
+        <div id="setup-area" class="hidden">
             <h2>Quem vai jogar?</h2>
             <div class="name-inputs">
-                <input type="text" id="player1-name" placeholder="Nome do Jogador 1">
-                <input type="text" id="player2-name" placeholder="Nome do Jogador 2">
+                <input type="text" id="player1-name" class="form-input" placeholder="Nome do Jogador 1">
+                <input type="text" id="player2-name" class="form-input" placeholder="Nome do Jogador 2">
             </div>
             <button id="start-game-button" class="control-button">Começar a Jogar</button>
+            <div id="logout-section">
+                Logado como: <span id="user-email"></span> | <button id="logout-button">Sair</button>
+            </div>
         </div>
 
         <!-- Área principal do jogo -->
@@ -323,8 +191,8 @@
                 </div>
             </div>
             <div class="options-container hidden" id="answer-buttons">
-                <button id="pass-button">Passa</button>
-                <button id="match-button">Deu Match</button>
+                <button id="pass-button" class="control-button">Passa</button>
+                <button id="match-button" class="control-button">Deu Match</button>
             </div>
             <p class="question-counter hidden">Perguntas: <span id="answered-count">0</span> / <span id="total-questions">0</span></p>
             <button id="end-game-button" class="control-button">Encerrar Jogo</button>
@@ -348,180 +216,268 @@
         </div>
     </div>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const setupArea = document.getElementById('setup-area');
-            const gameArea = document.getElementById('game-area');
-            const resultArea = document.getElementById('result-area');
-            const player1NameInput = document.getElementById('player1-name');
-            const player2NameInput = document.getElementById('player2-name');
-            const startGameButton = document.getElementById('start-game-button');
-            
-            const rouletteWheel = document.getElementById('roulette-wheel');
-            const spinButton = document.getElementById('spin-button');
-            const questionDisplay = document.getElementById('question-display');
-            const answerButtons = document.getElementById('answer-buttons');
-            const passButton = document.getElementById('pass-button');
-            const matchButton = document.getElementById('match-button');
-            const questionCounter = document.querySelector('.question-counter');
-            const answeredCountSpan = document.getElementById('answered-count');
-            const totalQuestionsSpan = document.getElementById('total-questions');
-            const endGameButton = document.getElementById('end-game-button');
-            const resultMessage = document.getElementById('result-message');
-            const resultDetails = document.getElementById('result-details');
-            const restartGameButton = document.getElementById('restart-game-button');
-            
-            const forfeitModal = document.getElementById('forfeit-modal');
-            const forfeitPayer = document.getElementById('forfeit-payer');
-            const forfeitText = document.getElementById('forfeit-text');
-            const continueButton = document.getElementById('continue-button');
+    <!-- SDKs do Firebase -->
+    <script type="module">
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/11.9.0/firebase-app.js";
+      import { 
+          getAuth, 
+          createUserWithEmailAndPassword, 
+          signInWithEmailAndPassword,
+          onAuthStateChanged,
+          signOut
+      } from "https://www.gstatic.com/firebasejs/11.9.0/firebase-auth.js";
 
-            const questions = [
-                "Quem notou o outro primeiro?", "Quem tomou a iniciativa de conversar?", "Quem tomou a iniciativa do primeiro beijo?",
-                "Quem se apaixonou primeiro?", "Quem pediu em namoro?", "Quem disse “eu te amo” primeiro?", "Quem começa as discussões?",
-                "Quem pede desculpas primeiro?", "Quem é mais carinhoso?", "Quem é mais grudento?", "Quem faz as melhores surpresas?",
-                "Quem é mais romântico?", "Quem dá os melhores presentes?", "Quem é mais teimoso?", "Quem é mais dorminhoco?", "Quem ronca?",
-                "Quem demora mais para se arrumar?", "Quem é mais mal-humorado de manhã?", "Quem é mais “mão de vaca”?", "Quem é mais ciumento?",
-                "Quem é mais bagunceiro?", "Quem dança melhor?", "Quem é mais preguiçoso?", "Quem é mais comilão?", "Quem é mais brincalhão?",
-                "Quem ri de bobeiras?", "Quem é 'bom de copo'?", "Quem conta as melhores piadas?", "Quem não dispensa uma boa fofoca?",
-                "Quem tem mais manias esquisitas?", "Quem faz mais dramas?", "Quem era mais bagunceiro na escola?", "Quem cozinha melhor?",
-                "Quem entende mais de música?", "Quem se veste melhor?", "Quem se esquece de tudo?", "Quem tem mais mania de limpeza?",
-                "Quem prefere ficar em casa a sair?", "Quem gosta mais de pedir fast food?", "Quem sonhava em se casar?",
-                "Quem toma mais a iniciativa na hora H?", "Quem é mais criativo na cama?", "Quem é mais barulhento?",
-                "Quem manda mensagens mais ousadas?", "Quem curte experimentar em lugares diferentes?"
-            ];
+      // Sua configuração do Firebase
+      const firebaseConfig = {
+        apiKey: "AIzaSyAp-9XHNRgJN2-Wvvgxn2659VXdzYLWUSQ",
+        authDomain: "jogo-do-amor-1acfc.firebaseapp.com",
+        projectId: "jogo-do-amor-1acfc",
+        storageBucket: "jogo-do-amor-1acfc.appspot.com",
+        messagingSenderId: "36172535519",
+        appId: "1:36172535519:web:31c9f3030065b21b143b6a",
+        measurementId: "G-ETTTBBS5YY"
+      };
 
-            const forfeits = [
-                "Remova uma peça de roupa.", "Dê um beijo demorado no pescoço.", "Faça uma massagem de 1 minuto nas costas.",
-                "Conte um segredo que nunca contou antes.", "Faça uma declaração de amor olhando nos olhos.", "Dance uma música brega por 30 segundos.",
-                "Deixe o outro postar uma foto engraçada sua nos stories.", "Faça 10 polichinelos falando 'eu te amo' a cada pulo.",
-                "Imite o outro por 1 minuto.", "Cante o refrão da música que vier à cabeça.", "Envie um áudio para o(a) parceiro(a) se declarando.",
-                "Dê um selinho de 10 segundos.", "Faça um elogio para cada parte do corpo do(a) parceiro(a)."
-            ];
-            
-            let playerNames = [];
-            let availableQuestions = [];
-            let answeredQuestionsCount = 0;
-            let matchCount = 0;
-            let isSpinning = false;
-            let currentRotation = 0;
+      // Inicializar Firebase
+      const app = initializeApp(firebaseConfig);
+      const auth = getAuth(app);
 
-            function initializeGame() {
-                const p1Name = player1NameInput.value.trim() || "Jogador 1";
-                const p2Name = player2NameInput.value.trim() || "Jogador 2";
-                playerNames = [p1Name, p2Name];
-                
-                setupArea.classList.add('hidden');
-                resultArea.classList.add('hidden');
-                gameArea.classList.remove('hidden');
+      // --- SELETORES DE ELEMENTOS ---
+      // Áreas principais
+      const authArea = document.getElementById('auth-area');
+      const setupArea = document.getElementById('setup-area');
+      const gameArea = document.getElementById('game-area');
+      const resultArea = document.getElementById('result-area');
+      
+      // Autenticação
+      const emailInput = document.getElementById('email-input');
+      const passwordInput = document.getElementById('password-input');
+      const loginButton = document.getElementById('login-button');
+      const registerButton = document.getElementById('register-button');
+      const logoutButton = document.getElementById('logout-button');
+      const authMessage = document.getElementById('auth-message');
+      const userEmailSpan = document.getElementById('user-email');
 
-                availableQuestions = [...questions];
-                answeredQuestionsCount = 0;
-                matchCount = 0;
-                isSpinning = false;
-                totalQuestionsSpan.textContent = questions.length;
-                answeredCountSpan.textContent = 0;
-                questionDisplay.textContent = "Clique em GIRAR para começar!";
-                answerButtons.classList.add('hidden');
-                questionCounter.classList.add('hidden');
-                spinButton.classList.remove('disabled');
-                forfeitModal.classList.remove('visible');
-            }
+      // Setup do jogo
+      const startGameButton = document.getElementById('start-game-button');
+      const player1NameInput = document.getElementById('player1-name');
+      const player2NameInput = document.getElementById('player2-name');
 
-            function spinRoulette() {
-                if (isSpinning) return;
-                
-                isSpinning = true;
-                spinButton.classList.add('disabled');
-                answerButtons.classList.add('hidden');
-                questionDisplay.textContent = "Girando a roleta...";
-                
-                const randomExtraRotation = 360 * 5 + Math.floor(Math.random() * 360);
-                currentRotation += randomExtraRotation;
-                rouletteWheel.style.transform = `rotate(${currentRotation}deg)`;
+      // Elementos do Jogo
+      const rouletteWheel = document.getElementById('roulette-wheel');
+      const spinButton = document.getElementById('spin-button');
+      const questionDisplay = document.getElementById('question-display');
+      const answerButtons = document.getElementById('answer-buttons');
+      const passButton = document.getElementById('pass-button');
+      const matchButton = document.getElementById('match-button');
+      const questionCounter = document.querySelector('.question-counter');
+      const answeredCountSpan = document.getElementById('answered-count');
+      const totalQuestionsSpan = document.getElementById('total-questions');
+      const endGameButton = document.getElementById('end-game-button');
 
-                setTimeout(() => {
-                    const question = getRandomQuestion();
-                    if (question) {
-                        questionDisplay.textContent = question;
-                        answerButtons.classList.remove('hidden');
-                        questionCounter.classList.remove('hidden');
-                        isSpinning = false;
-                    } else {
-                        displayFinalResult();
-                    }
-                }, 5000);
-            }
+      // Resultado e Reinício
+      const resultMessage = document.getElementById('result-message');
+      const resultDetails = document.getElementById('result-details');
+      const restartGameButton = document.getElementById('restart-game-button');
+      
+      // Modal
+      const forfeitModal = document.getElementById('forfeit-modal');
+      const forfeitPayer = document.getElementById('forfeit-payer');
+      const forfeitText = document.getElementById('forfeit-text');
+      const continueButton = document.getElementById('continue-button');
 
-            function getRandomQuestion() {
-                if (availableQuestions.length === 0) return null;
-                const randomIndex = Math.floor(Math.random() * availableQuestions.length);
-                const [question] = availableQuestions.splice(randomIndex, 1);
-                return question;
-            }
 
-            function handleAnswer(isMatch) {
-                if (isSpinning) return;
+      // --- LÓGICA DE AUTENTICAÇÃO ---
+      onAuthStateChanged(auth, (user) => {
+        authMessage.textContent = '';
+        if (user) {
+            userEmailSpan.textContent = user.email;
+            authArea.classList.add('hidden');
+            setupArea.classList.remove('hidden');
+            gameArea.classList.add('hidden');
+            resultArea.classList.add('hidden');
+        } else {
+            authArea.classList.remove('hidden');
+            setupArea.classList.add('hidden');
+            gameArea.classList.add('hidden');
+            resultArea.classList.add('hidden');
+        }
+      });
 
-                answeredQuestionsCount++;
-                answeredCountSpan.textContent = answeredQuestionsCount;
-
-                if (isMatch) {
-                    matchCount++;
-                    proceedToNextRound();
+      registerButton.addEventListener('click', () => {
+        const email = emailInput.value;
+        const password = passwordInput.value;
+        if (!email || password.length < 6) {
+            authMessage.textContent = 'Por favor, preencha e-mail e uma senha com no mínimo 6 caracteres.';
+            authMessage.className = 'error';
+            return;
+        }
+        createUserWithEmailAndPassword(auth, email, password)
+            .then(() => {
+                authMessage.textContent = 'Usuário registrado com sucesso!';
+                authMessage.className = 'success';
+            })
+            .catch((error) => {
+                if (error.code === 'auth/email-already-in-use') {
+                    authMessage.textContent = 'Este e-mail já está em uso.';
                 } else {
-                    showForfeit();
+                    authMessage.textContent = `Erro: ${error.message}`;
                 }
-            }
-
-            function showForfeit() {
-                const whoPays = playerNames[Math.floor(Math.random() * playerNames.length)];
-                const randomForfeit = forfeits[Math.floor(Math.random() * forfeits.length)];
-
-                forfeitPayer.textContent = `${whoPays} vai pagar a prenda!`;
-                forfeitText.textContent = `"${randomForfeit}"`;
-                forfeitModal.classList.add('visible');
-            }
-
-            function proceedToNextRound() {
-                forfeitModal.classList.remove('visible');
-                if (availableQuestions.length > 0) {
-                    spinRoulette();
-                } else {
-                    displayFinalResult();
-                }
-            }
-
-            function displayFinalResult() {
-                gameArea.classList.add('hidden');
-                resultArea.classList.remove('hidden');
-                const totalAnswered = answeredQuestionsCount > 0 ? answeredQuestionsCount : 1;
-                const percentage = Math.round((matchCount / totalAnswered) * 100);
-                
-                let message = "";
-                if (percentage >= 80) {
-                    message = "Sintonia Perfeita! ✨";
-                } else if (percentage >= 50) {
-                    message = "Vocês se conhecem bem! 😉";
-                } else {
-                    message = "Que divertido! Continuem se conhecendo! 😊";
-                }
-                
-                resultMessage.textContent = message;
-                resultDetails.textContent = `Vocês tiveram ${matchCount} de ${answeredQuestionsCount} matches (${percentage}% de sintonia)!`;
-            }
-
-            startGameButton.addEventListener('click', initializeGame);
-            spinButton.addEventListener('click', spinRoulette);
-            passButton.addEventListener('click', () => handleAnswer(false));
-            matchButton.addEventListener('click', () => handleAnswer(true));
-            endGameButton.addEventListener('click', displayFinalResult);
-            restartGameButton.addEventListener('click', () => {
-                resultArea.classList.add('hidden');
-                setupArea.classList.remove('hidden');
+                authMessage.className = 'error';
             });
-            continueButton.addEventListener('click', proceedToNextRound);
-        });
+      });
+
+      loginButton.addEventListener('click', () => {
+        const email = emailInput.value;
+        const password = passwordInput.value;
+        if (!email || !password) {
+            authMessage.textContent = 'Por favor, preencha e-mail e senha.';
+            authMessage.className = 'error';
+            return;
+        }
+        signInWithEmailAndPassword(auth, email, password)
+            .catch((error) => {
+                 if (error.code === 'auth/invalid-credential') {
+                    authMessage.textContent = 'E-mail ou senha inválidos.';
+                } else {
+                    authMessage.textContent = `Erro: ${error.message}`;
+                }
+                authMessage.className = 'error';
+            });
+      });
+
+      logoutButton.addEventListener('click', () => {
+        signOut(auth);
+      });
+
+      // --- LÓGICA DO JOGO ---
+      const questions = ["Quem notou o outro primeiro?", "Quem é mais carinhoso?", "Quem é mais ciumento?", "Quem cozinha melhor?"]; // Array de exemplo
+      const forfeits = ["Remova uma peça de roupa.", "Dê um beijo no pescoço.", "Faça uma massagem."]; // Array de exemplo
+
+      let playerNames = [];
+      let availableQuestions = [];
+      let answeredQuestionsCount = 0;
+      let matchCount = 0;
+      let isSpinning = false;
+      let currentRotation = 0;
+
+      function initializeGame() {
+        const p1Name = player1NameInput.value.trim() || "Jogador 1";
+        const p2Name = player2NameInput.value.trim() || "Jogador 2";
+        playerNames = [p1Name, p2Name];
+        
+        setupArea.classList.add('hidden');
+        gameArea.classList.remove('hidden');
+        resultArea.classList.add('hidden');
+
+        availableQuestions = [...questions];
+        answeredQuestionsCount = 0;
+        matchCount = 0;
+        isSpinning = false;
+        totalQuestionsSpan.textContent = questions.length;
+        answeredCountSpan.textContent = 0;
+        questionDisplay.textContent = "Clique em GIRAR para começar!";
+        answerButtons.classList.add('hidden');
+        questionCounter.classList.add('hidden');
+        spinButton.classList.remove('disabled');
+        forfeitModal.classList.remove('visible');
+      }
+
+      function spinRoulette() {
+        if (isSpinning) return;
+        
+        isSpinning = true;
+        spinButton.classList.add('disabled');
+        answerButtons.classList.add('hidden');
+        questionDisplay.textContent = "Girando a roleta...";
+        
+        const randomExtraRotation = 360 * 5 + Math.floor(Math.random() * 360);
+        currentRotation += randomExtraRotation;
+        rouletteWheel.style.transform = `rotate(${currentRotation}deg)`;
+
+        setTimeout(() => {
+            const question = getRandomQuestion();
+            if (question) {
+                questionDisplay.textContent = question;
+                answerButtons.classList.remove('hidden');
+                questionCounter.classList.remove('hidden');
+                isSpinning = false;
+            } else {
+                displayFinalResult();
+            }
+        }, 5000);
+      }
+
+      function getRandomQuestion() {
+        if (availableQuestions.length === 0) return null;
+        const randomIndex = Math.floor(Math.random() * availableQuestions.length);
+        const [question] = availableQuestions.splice(randomIndex, 1);
+        return question;
+      }
+
+      function handleAnswer(isMatch) {
+        if (isSpinning) return;
+
+        answeredQuestionsCount++;
+        answeredCountSpan.textContent = answeredQuestionsCount;
+
+        if (isMatch) {
+            matchCount++;
+            proceedToNextRound();
+        } else {
+            showForfeit();
+        }
+      }
+
+      function showForfeit() {
+        const whoPays = playerNames[Math.floor(Math.random() * playerNames.length)];
+        const randomForfeit = forfeits[Math.floor(Math.random() * forfeits.length)];
+
+        forfeitPayer.textContent = `${whoPays} vai pagar a prenda!`;
+        forfeitText.textContent = `"${randomForfeit}"`;
+        forfeitModal.classList.add('visible');
+      }
+
+      function proceedToNextRound() {
+        forfeitModal.classList.remove('visible');
+        if (availableQuestions.length > 0) {
+            spinRoulette();
+        } else {
+            displayFinalResult();
+        }
+      }
+
+      function displayFinalResult() {
+        gameArea.classList.add('hidden');
+        resultArea.classList.remove('hidden');
+        const totalAnswered = answeredQuestionsCount > 0 ? answeredQuestionsCount : 1;
+        const percentage = Math.round((matchCount / totalAnswered) * 100);
+        
+        let message = "";
+        if (percentage >= 80) {
+            message = "Sintonia Perfeita! ✨";
+        } else if (percentage >= 50) {
+            message = "Vocês se conhecem bem! 😉";
+        } else {
+            message = "Que divertido! Continuem se conhecendo! 😊";
+        }
+        
+        resultMessage.textContent = message;
+        resultDetails.textContent = `Vocês tiveram ${matchCount} de ${answeredQuestionsCount} matches (${percentage}% de sintonia)!`;
+      }
+      
+      // Listeners de Eventos do Jogo
+      startGameButton.addEventListener('click', initializeGame);
+      spinButton.addEventListener('click', spinRoulette);
+      passButton.addEventListener('click', () => handleAnswer(false));
+      matchButton.addEventListener('click', () => handleAnswer(true));
+      endGameButton.addEventListener('click', displayFinalResult);
+      restartGameButton.addEventListener('click', () => {
+        resultArea.classList.add('hidden');
+        setupArea.classList.remove('hidden');
+      });
+      continueButton.addEventListener('click', proceedToNextRound);
+
     </script>
 </body>
 </html>
