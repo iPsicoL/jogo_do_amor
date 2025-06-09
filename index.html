@@ -17,9 +17,10 @@
             min-height: 100vh;
             background: linear-gradient(135deg, #ff7e5f, #feb47b);
             margin: 0;
+            padding: 20px 0; /* Adiciona padding vertical para melhor espaçamento em mobile */
             color: #fff;
             text-align: center;
-            overflow: hidden;
+            overflow-x: hidden; /* Previne rolagem horizontal, mas permite a vertical */
             position: relative;
         }
 
@@ -110,20 +111,20 @@
 
         /* --- Jogo Principal --- */
         h1#question-display {
-            font-size: clamp(1.5rem, 4vw, 2rem);
+            font-size: clamp(1.2rem, 5vw, 1.8rem); /* Fonte ajustada para mobile */
             font-weight: 600;
-            margin-bottom: 30px;
-            min-height: 80px;
+            margin-bottom: 20px; /* Margem reduzida */
+            min-height: 70px; /* Altura mínima reduzida */
             display: flex;
             align-items: center;
             justify-content: center;
-            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.4);
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.4);
             color: #fff;
         }
 
         .roulette-wrapper {
             position: relative;
-            margin-bottom: 30px;
+            margin-bottom: 25px; /* Margem reduzida */
             display: flex;
             justify-content: center;
             align-items: center;
@@ -132,21 +133,21 @@
         .roulette-pointer {
             width: 0;
             height: 0;
-            border-left: 20px solid transparent;
-            border-right: 20px solid transparent;
-            border-top: 30px solid #ffde59;
+            border-left: 15px solid transparent; /* Reduzido */
+            border-right: 15px solid transparent; /* Reduzido */
+            border-top: 25px solid #ffde59; /* Reduzido */
             position: absolute;
-            top: -20px;
+            top: -15px; /* Ajustado */
             z-index: 10;
             filter: drop-shadow(0 -2px 2px rgba(0,0,0,0.3));
         }
 
         .roulette-container {
-            width: 280px;
-            height: 280px;
+            width: 250px; /* Tamanho ajustado */
+            height: 250px; /* Tamanho ajustado */
             border-radius: 50%;
-            border: 10px solid #fff;
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.3), inset 0 0 15px rgba(0, 0, 0, 0.4);
+            border: 8px solid #fff; /* Borda reduzida */
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.3), inset 0 0 10px rgba(0, 0, 0, 0.4);
             display: flex;
             justify-content: center;
             align-items: center;
@@ -164,19 +165,19 @@
 
         .center-button {
             position: absolute;
-            width: 90px;
-            height: 90px;
+            width: 80px; /* Reduzido */
+            height: 80px; /* Reduzido */
             background-color: #fff;
             border-radius: 50%;
-            border: 5px solid #ff7e5f;
-            box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+            border: 4px solid #ff7e5f;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
             cursor: pointer;
             display: flex;
             justify-content: center;
             align-items: center;
             font-weight: bold;
             color: #ff7e5f;
-            font-size: 1.5em;
+            font-size: 1.3em;
             text-transform: uppercase;
             user-select: none;
             transition: transform 0.2s ease;
@@ -193,15 +194,15 @@
 
         .options-container {
             display: flex;
-            gap: 20px;
+            gap: 15px; /* Espaço reduzido */
             margin-top: 20px;
             flex-wrap: wrap;
             justify-content: center;
         }
 
         .options-container button, .control-button {
-            padding: 15px 30px;
-            font-size: 1.1em;
+            padding: 12px 25px; /* Padding reduzido */
+            font-size: 1em; /* Fonte reduzida */
             border: none;
             border-radius: 50px;
             cursor: pointer;
@@ -224,13 +225,13 @@
         #start-game-button { background-color: #8edc81; color: #fff; }
         #start-game-button:hover { background-color: #7ac76c; }
 
-        .question-counter { margin-top: 25px; font-size: 1.1em; color: #eee; }
+        .question-counter { margin-top: 20px; font-size: 1em; color: #eee; }
         .question-counter span { font-weight: bold; color: #fff; }
 
         #end-game-button, #restart-game-button {
             background-color: #ff6b6b;
             color: #fff;
-            margin-top: 30px;
+            margin-top: 25px;
         }
         #end-game-button:hover, #restart-game-button:hover { background-color: #ee5253; }
 
@@ -265,7 +266,7 @@
         .modal-overlay.visible { opacity: 1; visibility: visible; }
         .modal-content {
             background: linear-gradient(135deg, #6a11cb, #2575fc);
-            padding: 40px;
+            padding: 30px;
             border-radius: 20px;
             text-align: center;
             color: #fff;
@@ -276,17 +277,21 @@
             transition: transform 0.3s ease;
         }
         .modal-overlay.visible .modal-content { transform: scale(1); }
-        .modal-content h2 { font-size: 2.5rem; margin-top: 0; margin-bottom: 10px; color: #fdd835; text-shadow: 2px 2px 4px rgba(0,0,0,0.3); }
-        #forfeit-payer { font-size: 1.5rem; font-weight: 600; margin-bottom: 20px; }
-        #forfeit-text { font-size: 1.8rem; min-height: 60px; margin-bottom: 30px; }
+        .modal-content h2 { font-size: 2rem; margin-top: 0; margin-bottom: 10px; color: #fdd835; text-shadow: 2px 2px 4px rgba(0,0,0,0.3); }
+        #forfeit-payer { font-size: 1.3rem; font-weight: 600; margin-bottom: 15px; }
+        #forfeit-text { font-size: 1.5rem; min-height: 50px; margin-bottom: 25px; }
 
-        @media (max-width: 600px) {
-            .main-container { padding: 20px; }
-            .roulette-container { width: 220px; height: 220px; }
-            .center-button { width: 70px; height: 70px; font-size: 1.2em; }
-            .modal-content h2 { font-size: 2rem; }
-            #forfeit-text { font-size: 1.5rem; }
-            #setup-area h2 { font-size: 1.8rem; }
+        /* --- MANTÉM OS ESTILOS MAIORES PARA TELAS GRANDES --- */
+        @media (min-width: 601px) {
+            .main-container { padding: 30px 40px; }
+            h1#question-display { font-size: clamp(1.8rem, 4vw, 2.2rem); margin-bottom: 30px; min-height: 80px; }
+            .roulette-container { width: 280px; height: 280px; border-width: 10px; }
+            .roulette-pointer { border-left-width: 20px; border-right-width: 20px; border-top-width: 30px; top: -20px; }
+            .center-button { width: 90px; height: 90px; font-size: 1.5em; border-width: 5px; }
+            .options-container button, .control-button { padding: 15px 30px; font-size: 1.1em; }
+            .modal-content h2 { font-size: 2.5rem; }
+            #forfeit-payer { font-size: 1.5rem; }
+            #forfeit-text { font-size: 1.8rem; }
         }
     </style>
 </head>
@@ -402,7 +407,6 @@
             let currentRotation = 0;
 
             function initializeGame() {
-                // Pega os nomes, usando "Jogador 1/2" como padrão se estiverem em branco
                 const p1Name = player1NameInput.value.trim() || "Jogador 1";
                 const p2Name = player2NameInput.value.trim() || "Jogador 2";
                 playerNames = [p1Name, p2Name];
@@ -500,7 +504,7 @@
                 } else if (percentage >= 50) {
                     message = "Vocês se conhecem bem! 😉";
                 } else {
-                    message = "Que divertido! Continuem se conhecendo! �";
+                    message = "Que divertido! Continuem se conhecendo! 😊";
                 }
                 
                 resultMessage.textContent = message;
