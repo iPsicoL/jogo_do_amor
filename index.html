@@ -128,7 +128,7 @@
         #pass-button { background-color: #ffc93c; color: #5d4037; }
         #login-button, #match-button, #start-game-button { background-color: #8edc81; color: #fff; }
         .question-counter { margin-top: 20px; font-size: 1em; color: #eee; }
-        #end-game-button, #restart-game-button { background-color: #ff6b6b; color: #fff; margin-top: 25px; }
+        #end-game-button { background-color: #ff6b6b; color: #fff; margin-top: 25px; }
 
         /* --- Modal e Tela de Resultado --- */
         .result-container { display: flex; flex-direction: column; align-items: center; justify-content: center; }
@@ -201,7 +201,6 @@
         <div id="result-area" class="result-container hidden">
             <h2 id="result-message"></h2>
             <p id="result-details"></p>
-            <button id="restart-game-button" class="control-button">Jogar Novamente</button>
         </div>
     </div>
 
@@ -273,10 +272,9 @@
       const totalQuestionsSpan = document.getElementById('total-questions');
       const endGameButton = document.getElementById('end-game-button');
 
-      // Resultado e Reinício
+      // Resultado
       const resultMessage = document.getElementById('result-message');
       const resultDetails = document.getElementById('result-details');
-      const restartGameButton = document.getElementById('restart-game-button');
       
       // Modal
       const forfeitModal = document.getElementById('forfeit-modal');
@@ -473,11 +471,6 @@
       passButton.addEventListener('click', () => handleAnswer(false));
       matchButton.addEventListener('click', () => handleAnswer(true));
       endGameButton.addEventListener('click', displayFinalResult);
-
-      restartGameButton.addEventListener('click', () => {
-        showScreen('game-area');
-        initializeGame();
-      });
       
       continueButton.addEventListener('click', proceedToNextRound);
 
