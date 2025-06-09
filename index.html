@@ -219,8 +219,7 @@
     <script type="module">
       import { initializeApp } from "https://www.gstatic.com/firebasejs/11.9.0/firebase-app.js";
       import { 
-          getAuth, 
-          createUserWithEmailAndPassword, 
+          getAuth,
           signInWithEmailAndPassword,
           onAuthStateChanged,
           signOut
@@ -247,6 +246,7 @@
       const setupArea = document.getElementById('setup-area');
       const gameArea = document.getElementById('game-area');
       const resultArea = document.getElementById('result-area');
+      const screens = [authArea, setupArea, gameArea, resultArea];
       
       // Autenticação
       const emailInput = document.getElementById('email-input');
@@ -283,22 +283,26 @@
       const forfeitPayer = document.getElementById('forfeit-payer');
       const forfeitText = document.getElementById('forfeit-text');
       const continueButton = document.getElementById('continue-button');
-
+      
+      // --- LÓGICA DE GERENCIAMENTO DE TELA ---
+      function showScreen(screenId) {
+          screens.forEach(screen => {
+              if (screen.id === screenId) {
+                  screen.classList.remove('hidden');
+              } else {
+                  screen.classList.add('hidden');
+              }
+          });
+      }
 
       // --- LÓGICA DE AUTENTICAÇÃO ---
       onAuthStateChanged(auth, (user) => {
         authMessage.textContent = '';
         if (user) {
             userEmailSpan.textContent = user.email;
-            authArea.classList.add('hidden');
-            setupArea.classList.remove('hidden');
-            gameArea.classList.add('hidden');
-            resultArea.classList.add('hidden');
+            showScreen('setup-area');
         } else {
-            authArea.classList.remove('hidden');
-            setupArea.classList.add('hidden');
-            gameArea.classList.add('hidden');
-            resultArea.classList.add('hidden');
+            showScreen('auth-area');
         }
       });
 
@@ -326,8 +330,28 @@
       });
 
       // --- LÓGICA DO JOGO ---
-      const questions = ["Quem notou o outro primeiro?", "Quem é mais carinhoso?", "Quem é mais ciumento?", "Quem cozinha melhor?"]; // Array de exemplo
-      const forfeits = ["Remova uma peça de roupa.", "Dê um beijo no pescoço.", "Faça uma massagem."]; // Array de exemplo
+      const questions = [
+          "Quem notou o outro primeiro?", "Quem tomou a iniciativa de conversar?", "Quem tomou a iniciativa do primeiro beijo?",
+          "Quem se apaixonou primeiro?", "Quem pediu em namoro?", "Quem disse “eu te amo” primeiro?", "Quem começa as discussões?",
+          "Quem pede desculpas primeiro?", "Quem é mais carinhoso?", "Quem é mais grudento?", "Quem faz as melhores surpresas?",
+          "Quem é mais romântico?", "Quem dá os melhores presentes?", "Quem é mais teimoso?", "Quem é mais dorminhoco?", "Quem ronca?",
+          "Quem demora mais para se arrumar?", "Quem é mais mal-humorado de manhã?", "Quem é mais “mão de vaca”?", "Quem é mais ciumento?",
+          "Quem é mais bagunceiro?", "Quem dança melhor?", "Quem é mais preguiçoso?", "Quem é mais comilão?", "Quem é mais brincalhão?",
+          "Quem ri de bobeiras?", "Quem é 'bom de copo'?", "Quem conta as melhores piadas?", "Quem não dispensa uma boa fofoca?",
+          "Quem tem mais manias esquisitas?", "Quem faz mais dramas?", "Quem era mais bagunceiro na escola?", "Quem cozinha melhor?",
+          "Quem entende mais de música?", "Quem se veste melhor?", "Quem se esquece de tudo?", "Quem tem mais mania de limpeza?",
+          "Quem prefere ficar em casa a sair?", "Quem gosta mais de pedir fast food?", "Quem sonhava em se casar?",
+          "Quem toma mais a iniciativa na hora H?", "Quem é mais criativo na cama?", "Quem é mais barulhento?",
+          "Quem manda mensagens mais ousadas?", "Quem curte experimentar em lugares diferentes?"
+      ];
+
+      const forfeits = [
+          "Remova uma peça de roupa.", "Dê um beijo demorado no pescoço.", "Faça uma massagem de 1 minuto nas costas.",
+          "Conte um segredo que nunca contou antes.", "Faça uma declaração de amor olhando nos olhos.", "Dance uma música brega por 30 segundos.",
+          "Deixe o outro postar uma foto engraçada sua nos stories.", "Faça 10 polichinelos falando 'eu te amo' a cada pulo.",
+          "Imite o outro por 1 minuto.", "Cante o refrão da música que vier à cabeça.", "Envie um áudio para o(a) parceiro(a) se declarando.",
+          "Dê um selinho de 10 segundos.", "Faça um elogio para cada parte do corpo do(a) parceiro(a)."
+      ];
 
       let playerNames = [];
       let availableQuestions = [];
@@ -337,21 +361,15 @@
       let currentRotation = 0;
 
       function initializeGame() {
-        const p1Name = player1NameInput.value.trim() || "Jogador 1";
-        const p2Name = player2NameInput.value.trim() || "Jogador 2";
-        playerNames = [p1Name, p2Name];
-        
-        setupArea.classList.add('hidden');
-        gameArea.classList.remove('hidden');
-        resultArea.classList.add('hidden');
-
         availableQuestions = [...questions];
         answeredQuestionsCount = 0;
         matchCount = 0;
         isSpinning = false;
+        
         totalQuestionsSpan.textContent = questions.length;
         answeredCountSpan.textContent = 0;
         questionDisplay.textContent = "Clique em GIRAR para começar!";
+        
         answerButtons.classList.add('hidden');
         questionCounter.classList.add('hidden');
         spinButton.classList.remove('disabled');
@@ -423,8 +441,8 @@
       }
 
       function displayFinalResult() {
-        gameArea.classList.add('hidden');
-        resultArea.classList.remove('hidden');
+        showScreen('result-area');
+
         const totalAnswered = answeredQuestionsCount > 0 ? answeredQuestionsCount : 1;
         const percentage = Math.round((matchCount / totalAnswered) * 100);
         
@@ -442,15 +460,25 @@
       }
       
       // Listeners de Eventos do Jogo
-      startGameButton.addEventListener('click', initializeGame);
+      startGameButton.addEventListener('click', () => {
+        const p1Name = player1NameInput.value.trim() || "Jogador 1";
+        const p2Name = player2NameInput.value.trim() || "Jogador 2";
+        playerNames = [p1Name, p2Name];
+        
+        showScreen('game-area');
+        initializeGame();
+      });
+
       spinButton.addEventListener('click', spinRoulette);
       passButton.addEventListener('click', () => handleAnswer(false));
       matchButton.addEventListener('click', () => handleAnswer(true));
       endGameButton.addEventListener('click', displayFinalResult);
+
       restartGameButton.addEventListener('click', () => {
-        resultArea.classList.add('hidden');
-        setupArea.classList.remove('hidden');
+        showScreen('game-area');
+        initializeGame();
       });
+      
       continueButton.addEventListener('click', proceedToNextRound);
 
     </script>
