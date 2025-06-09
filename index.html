@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Roleta do Amor 2.0 - Com Prendas!</title>
+    <title>Roleta do Amor - Personalizado</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
@@ -56,8 +56,8 @@
             }
         }
 
-        /* --- Contêiner Principal do Jogo --- */
-        .game-container {
+        /* --- Contêineres --- */
+        .main-container {
             background-color: rgba(0, 0, 0, 0.35);
             padding: 30px 40px;
             border-radius: 20px;
@@ -74,6 +74,41 @@
             transition: opacity 0.5s ease;
         }
 
+        .hidden { display: none; }
+
+        /* --- Tela de Início (Setup) --- */
+        #setup-area h2 {
+            font-size: 2.2rem;
+            margin-bottom: 25px;
+        }
+        .name-inputs {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            width: 100%;
+            max-width: 350px;
+            margin-bottom: 30px;
+        }
+        .name-inputs input {
+            padding: 15px;
+            border-radius: 25px;
+            border: 2px solid #fff;
+            background-color: rgba(255,255,255,0.2);
+            color: #fff;
+            font-size: 1.1rem;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+        .name-inputs input::placeholder {
+            color: rgba(255,255,255,0.7);
+        }
+        .name-inputs input:focus {
+            outline: none;
+            background-color: rgba(255,255,255,0.3);
+            border-color: #ffde59;
+        }
+
+        /* --- Jogo Principal --- */
         h1#question-display {
             font-size: clamp(1.5rem, 4vw, 2rem);
             font-weight: 600;
@@ -86,7 +121,6 @@
             color: #fff;
         }
 
-        /* --- Estilos da Roleta --- */
         .roulette-wrapper {
             position: relative;
             margin-bottom: 30px;
@@ -157,7 +191,6 @@
             border-color: #ccc;
         }
 
-        /* --- Botões de Opção e Controle --- */
         .options-container {
             display: flex;
             gap: 20px;
@@ -183,19 +216,15 @@
             transform: translateY(2px);
             box-shadow: 0 2px 5px rgba(0,0,0,0.2);
         }
-        
-        .hidden { display: none; }
 
         #pass-button { background-color: #ffc93c; color: #5d4037; }
         #pass-button:hover { background-color: #f7b733; }
         #match-button { background-color: #8edc81; color: #fff; }
         #match-button:hover { background-color: #7ac76c; }
+        #start-game-button { background-color: #8edc81; color: #fff; }
+        #start-game-button:hover { background-color: #7ac76c; }
 
-        .question-counter {
-            margin-top: 25px;
-            font-size: 1.1em;
-            color: #eee;
-        }
+        .question-counter { margin-top: 25px; font-size: 1.1em; color: #eee; }
         .question-counter span { font-weight: bold; color: #fff; }
 
         #end-game-button, #restart-game-button {
@@ -205,30 +234,25 @@
         }
         #end-game-button:hover, #restart-game-button:hover { background-color: #ee5253; }
 
-        /* --- Tela de Resultado --- */
         .result-container {
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
         }
-        
         #result-message {
             font-size: clamp(1.8rem, 5vw, 2.5rem);
             font-weight: 700;
             margin-bottom: 15px;
             text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.7);
         }
-
         #result-details { font-size: 1.2rem; margin-bottom: 30px; }
 
         /* --- MODAL DA PRENDA --- */
         .modal-overlay {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
             background-color: rgba(0, 0, 0, 0.7);
             display: flex;
             justify-content: center;
@@ -238,12 +262,7 @@
             visibility: hidden;
             transition: opacity 0.3s ease, visibility 0.3s ease;
         }
-
-        .modal-overlay.visible {
-            opacity: 1;
-            visibility: visible;
-        }
-
+        .modal-overlay.visible { opacity: 1; visibility: visible; }
         .modal-content {
             background: linear-gradient(135deg, #6a11cb, #2575fc);
             padding: 40px;
@@ -256,50 +275,40 @@
             transform: scale(0.9);
             transition: transform 0.3s ease;
         }
-        
-        .modal-overlay.visible .modal-content {
-            transform: scale(1);
-        }
+        .modal-overlay.visible .modal-content { transform: scale(1); }
+        .modal-content h2 { font-size: 2.5rem; margin-top: 0; margin-bottom: 10px; color: #fdd835; text-shadow: 2px 2px 4px rgba(0,0,0,0.3); }
+        #forfeit-payer { font-size: 1.5rem; font-weight: 600; margin-bottom: 20px; }
+        #forfeit-text { font-size: 1.8rem; min-height: 60px; margin-bottom: 30px; }
 
-        .modal-content h2 {
-            font-size: 2.5rem;
-            margin-top: 0;
-            margin-bottom: 10px;
-            color: #fdd835;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
-        }
-
-        #forfeit-payer {
-            font-size: 1.5rem;
-            font-weight: 600;
-            margin-bottom: 20px;
-        }
-
-        #forfeit-text {
-            font-size: 1.8rem;
-            min-height: 60px;
-            margin-bottom: 30px;
-        }
-
-        /* --- Responsividade --- */
         @media (max-width: 600px) {
-            .game-container { padding: 20px; }
+            .main-container { padding: 20px; }
             .roulette-container { width: 220px; height: 220px; }
             .center-button { width: 70px; height: 70px; font-size: 1.2em; }
             .modal-content h2 { font-size: 2rem; }
             #forfeit-text { font-size: 1.5rem; }
+            #setup-area h2 { font-size: 1.8rem; }
         }
     </style>
 </head>
 <body>
-
     <div class="hearts-container">
         <div class="heart">❤️</div><div class="heart">💖</div><div class="heart">💕</div>
         <div class="heart">💓</div><div class="heart">❤️</div><div class="heart">💖</div><div class="heart">💕</div>
     </div>
 
-    <div class="game-container">
-        <div id="game-area">
+    <div class="main-container">
+        <!-- Tela de configuração inicial -->
+        <div id="setup-area">
+            <h2>Quem vai jogar?</h2>
+            <div class="name-inputs">
+                <input type="text" id="player1-name" placeholder="Nome do Jogador 1">
+                <input type="text" id="player2-name" placeholder="Nome do Jogador 2">
+            </div>
+            <button id="start-game-button" class="control-button">Começar a Jogar</button>
+        </div>
+
+        <!-- Área principal do jogo -->
+        <div id="game-area" class="hidden">
             <h1 id="question-display">Clique em GIRAR para começar!</h1>
             <div class="roulette-wrapper">
                 <div class="roulette-pointer"></div>
@@ -316,6 +325,7 @@
             <button id="end-game-button" class="control-button">Encerrar Jogo</button>
         </div>
 
+        <!-- Área de resultado final -->
         <div id="result-area" class="result-container hidden">
             <h2 id="result-message"></h2>
             <p id="result-details"></p>
@@ -335,8 +345,13 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
+            const setupArea = document.getElementById('setup-area');
             const gameArea = document.getElementById('game-area');
             const resultArea = document.getElementById('result-area');
+            const player1NameInput = document.getElementById('player1-name');
+            const player2NameInput = document.getElementById('player2-name');
+            const startGameButton = document.getElementById('start-game-button');
+            
             const rouletteWheel = document.getElementById('roulette-wheel');
             const spinButton = document.getElementById('spin-button');
             const questionDisplay = document.getElementById('question-display');
@@ -350,7 +365,7 @@
             const resultMessage = document.getElementById('result-message');
             const resultDetails = document.getElementById('result-details');
             const restartGameButton = document.getElementById('restart-game-button');
-            // Elementos do Modal
+            
             const forfeitModal = document.getElementById('forfeit-modal');
             const forfeitPayer = document.getElementById('forfeit-payer');
             const forfeitText = document.getElementById('forfeit-text');
@@ -378,7 +393,8 @@
                 "Imite o outro por 1 minuto.", "Cante o refrão da música que vier à cabeça.", "Envie um áudio para o(a) parceiro(a) se declarando.",
                 "Dê um selinho de 10 segundos.", "Faça um elogio para cada parte do corpo do(a) parceiro(a)."
             ];
-
+            
+            let playerNames = [];
             let availableQuestions = [];
             let answeredQuestionsCount = 0;
             let matchCount = 0;
@@ -386,19 +402,25 @@
             let currentRotation = 0;
 
             function initializeGame() {
+                // Pega os nomes, usando "Jogador 1/2" como padrão se estiverem em branco
+                const p1Name = player1NameInput.value.trim() || "Jogador 1";
+                const p2Name = player2NameInput.value.trim() || "Jogador 2";
+                playerNames = [p1Name, p2Name];
+                
+                setupArea.classList.add('hidden');
+                resultArea.classList.add('hidden');
+                gameArea.classList.remove('hidden');
+
                 availableQuestions = [...questions];
                 answeredQuestionsCount = 0;
                 matchCount = 0;
                 isSpinning = false;
                 totalQuestionsSpan.textContent = questions.length;
                 answeredCountSpan.textContent = 0;
-                gameArea.classList.remove('hidden');
-                resultArea.classList.add('hidden');
                 questionDisplay.textContent = "Clique em GIRAR para começar!";
                 answerButtons.classList.add('hidden');
                 questionCounter.classList.add('hidden');
                 spinButton.classList.remove('disabled');
-                endGameButton.classList.remove('hidden');
                 forfeitModal.classList.remove('visible');
             }
 
@@ -449,7 +471,7 @@
             }
 
             function showForfeit() {
-                const whoPays = Math.random() < 0.5 ? "ELE" : "ELA";
+                const whoPays = playerNames[Math.floor(Math.random() * playerNames.length)];
                 const randomForfeit = forfeits[Math.floor(Math.random() * forfeits.length)];
 
                 forfeitPayer.textContent = `${whoPays} vai pagar a prenda!`;
@@ -478,21 +500,23 @@
                 } else if (percentage >= 50) {
                     message = "Vocês se conhecem bem! 😉";
                 } else {
-                    message = "Que divertido! Continuem se conhecendo! 😊";
+                    message = "Que divertido! Continuem se conhecendo! �";
                 }
                 
                 resultMessage.textContent = message;
                 resultDetails.textContent = `Vocês tiveram ${matchCount} de ${answeredQuestionsCount} matches (${percentage}% de sintonia)!`;
             }
 
+            startGameButton.addEventListener('click', initializeGame);
             spinButton.addEventListener('click', spinRoulette);
             passButton.addEventListener('click', () => handleAnswer(false));
             matchButton.addEventListener('click', () => handleAnswer(true));
             endGameButton.addEventListener('click', displayFinalResult);
-            restartGameButton.addEventListener('click', initializeGame);
+            restartGameButton.addEventListener('click', () => {
+                resultArea.classList.add('hidden');
+                setupArea.classList.remove('hidden');
+            });
             continueButton.addEventListener('click', proceedToNextRound);
-
-            initializeGame();
         });
     </script>
 </body>
